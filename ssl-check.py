@@ -9,7 +9,7 @@ This script will log into a pod and check all of the .conf files in /nas/wp/conf
 
 """
 
-sshname = "yourusername_" # replace with your login
+sshname = "mcalabresi_" # replace with your login
 
 if __name__ == "__main__":
     # Check for parameters: first parameter should be a pod/cluster; subsequent parameters should be a list of installs
