@@ -17,6 +17,9 @@ if __name__ == "__main__":
     if len(args) != 2:
         print "Usage: ssl [pod]"
         sys.exit(2)
+    execstr = "ssh " + sshname + "@pod-" + args[1] + ".wpengine.com \"cd /nas/local/ssl; ls\""
+    print "\nList of installs with SSL certificates on the server:\n"
+    call(execstr, shell=True)
     execstr = "ssh " + sshname + "@pod-" + args[1] + ".wpengine.com \"cd /nas/wp/conf/lb/sites; grep :443 *.conf\""
     print "\nList of sites that have a dedicated IP - check this against your migration list:\n"
     call(execstr, shell=True)

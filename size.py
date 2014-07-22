@@ -7,7 +7,7 @@ TODO: add capability to check parent-child output
 """
 
 
-sshname = "yoursshnamehere" # replace with your login
+sshname = "mcalabresi_" # replace with your login
 
 if __name__ == "__main__":
     # Check for parameters: first parameter should be a pod/cluster; subsequent parameters should be a list of installs
@@ -25,8 +25,14 @@ if __name__ == "__main__":
     for arg in args[2:]:
         stgstr += " " + arg
     stgstr += "\""
+    print "production sites:\n"
     call(execstr, shell=True)
     print "staging sites:\n"
     call(stgstr, shell=True)
 
-    
+"""
+
+This is a one-liner to run from bash:
+
+ourvar=$(sudo /nas/wp/ec2/cluster parent-child acctname); echo -e "du -shc "${ourvar}| bash
+"""

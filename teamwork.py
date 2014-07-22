@@ -11,10 +11,9 @@ import urllib
 import urllib2
 
 # TeamWork user-specific data -- change this to match your own
-username="youremailaddress"
-key="yourAPIkey"
-companyID = "yourcompanyID"
-# End user-specific data
+username="matthew@wpengine.com"
+key="jump497ankle"
+companyID = "27567"
 
 toplevelURL = "https://wpengine.teamwork.com/"
 
