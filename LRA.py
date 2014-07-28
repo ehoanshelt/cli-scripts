@@ -2,10 +2,10 @@
 import sys
 import pickle
 import os
-from subprocess import Popen, PIPE
+from subprocess import Popen, PIPE, call
 
-sshname = "yourusernamehere" # replace with your login
-localname = "yourlocalname" # replace with your login
+sshname = "yoursshusername" # replace with your login
+localname = "yourlocalfilename" # replace with your login
 
 if __name__ == "__main__":
     # Check for parameters: first parameter should be a pod/cluster; subsequent parameters should be a list of installs
@@ -141,3 +141,20 @@ if __name__ == "__main__":
     else:
         print successmessage
         print "++++++++++++++++++++++++++++++++++"
+
+#################### Check for Slow SQL Queries #############################
+    sqlslow = "ssh -t %s@pod-%s.wpengine.com \"sudo cat /var/log/mysql/mysql-slow.log | grep %s\"" % (sshname, args[1], args[2])
+    print "My-SQL Slow Log:\n"
+    call(sqlslow, shell=True)
+    print "++++++++++++++++++++++++++++++++++"
+
+#################### Check for Long Query Error #############################
+    longquery = "ssh -t %s@pod-%s.wpengine.com \"sudo cat /var/log/apache2/%s.error.log | grep LONG\"" % (sshname, args[1], args[2])
+    print "Long Query Log:\n"
+    call(longquery, shell=True)
+    print "++++++++++++++++++++++++++++++++++"
+	
+#################### Check for Upload Manipulation in Themes and PLugins #############################
+    sqlslow = "ssh -t %s@pod-%s.wpengine.com \"cat /var/log/mysql/mysql-slow.log | grep ehoanshelt" % (sshname, args[1])
+    print "My-SQL Slow Log:\n"
+    call(sqlslow, shell=True)
