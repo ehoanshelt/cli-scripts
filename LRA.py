@@ -5,6 +5,7 @@ import os
 from subprocess import Popen, PIPE
 
 sshname = "yourusernamehere" # replace with your login
+localname = "yourlocalname" # replace with your login
 
 if __name__ == "__main__":
     # Check for parameters: first parameter should be a pod/cluster; subsequent parameters should be a list of installs
@@ -17,7 +18,8 @@ if __name__ == "__main__":
     if len(args[1]) > 3:
     	connstr = "ssh -t %s@pod-%s.wpengine.com" % (sshname,args[1])
 
-    localdir = '/Users/erichoanshelt/Documents/LRA/%s' % (args[2])
+    localdir = '/Users/%s/Documents/LRA/%s' % (localname, args[2])
+    successmessage = 'Looks as clean as a whistle!'
 
 #################### Check for Select * in Themes and PLugins #############################
     
@@ -37,8 +39,7 @@ if __name__ == "__main__":
         print "Writing to File Completed to %s/bad_query_themes.txt" % (localdir)
         print "++++++++++++++++++++++++++++++++++"
     else:
-        text = "Looks as clean as a whistle!"
-        print text
+        print successmessage
         print "++++++++++++++++++++++++++++++++++"
     
     commandstrplugins = " \"grep -r 'Select \*' /nas/wp/www/sites/%s/wp-content/plugins\"" % (args[2])
@@ -57,8 +58,7 @@ if __name__ == "__main__":
         print "Writing to File Completed to %s/bad_query_plugins.txt" % (localdir)
         print "++++++++++++++++++++++++++++++++++"
     else:
-        text = "Looks as clean as a whistle!"
-        print text
+        print successmessage
         print "++++++++++++++++++++++++++++++++++"
     
 #################### Check for SESSION Variables in Themes and PLugins #############################
@@ -79,8 +79,7 @@ if __name__ == "__main__":
         print "Writing to File Completed to %s/SESSION_themes.txt" % (localdir)
         print "++++++++++++++++++++++++++++++++++"
     else:
-        text = "Looks as clean as a whistle!"
-        print text
+        print successmessage
         print "++++++++++++++++++++++++++++++++++"
     
     commandstrsesp = " \"grep -r '_SESSION' /nas/wp/www/sites/%s/wp-content/plugins\"" % (args[2])
@@ -99,8 +98,7 @@ if __name__ == "__main__":
         print "Writing to File Completed to %s/SESSION_plugins.txt" % (localdir)
         print "++++++++++++++++++++++++++++++++++"
     else:
-        text = "Looks as clean as a whistle!"
-        print text
+        print successmessage
         print "++++++++++++++++++++++++++++++++++"
         
         
@@ -122,8 +120,7 @@ if __name__ == "__main__":
         print "Writing to File Completed to %s/Upload_Mani_themes.txt" % (localdir)
         print "++++++++++++++++++++++++++++++++++"
     else:
-        text = "Looks as clean as a whistle!"
-        print text
+        print successmessage
         print "++++++++++++++++++++++++++++++++++"
     
     commandstruploadp = " \"ack-grep -r 'add_action(\'upload_dir' /nas/wp/www/sites/%s/wp-content/plugins\"" % (args[2])
@@ -142,7 +139,5 @@ if __name__ == "__main__":
         print "Writing to File Completed to %s/Upload_Mani_plugins.txt" % (localdir)
         print "++++++++++++++++++++++++++++++++++"
     else:
-        text = "Looks as clean as a whistle!"
-        print text
+        print successmessage
         print "++++++++++++++++++++++++++++++++++"
-
