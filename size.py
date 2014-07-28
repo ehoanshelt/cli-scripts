@@ -7,7 +7,7 @@ TODO: add capability to check parent-child output
 """
 
 
-sshname = "mcalabresi_" # replace with your login
+sshname = "yourusernamehere" # replace with your login
 
 if __name__ == "__main__":
     # Check for parameters: first parameter should be a pod/cluster; subsequent parameters should be a list of installs
@@ -15,13 +15,13 @@ if __name__ == "__main__":
     if len(args) < 3:
         print "Usage: size [cluster] [install1] [install2] ..."
         sys.exit(2)
-    execstr = "ssh -t " + sshname + "@pod-" + args[1] + ".wpengine.com \"cd /nas/wp/www/sites; sudo du -shc"
+    execstr = "ssh -t %s@pod-%s.wpengine.com \"cd /nas/wp/www/sites; sudo du -shc" % (sshname, args[1])
     for arg in args[2:]:
         execstr += " " + arg
     execstr += "\""
 
     
-    stgstr = "ssh -t " + sshname + "@pod-" + args[1] + ".wpengine.com \"cd /nas/wp/www/staging; sudo du -shc"
+    stgstr = "ssh -t %s@pod-%s.wpengine.com \"cd /nas/wp/www/staging; sudo du -shc" % (sshname, args[1])
     for arg in args[2:]:
         stgstr += " " + arg
     stgstr += "\""
