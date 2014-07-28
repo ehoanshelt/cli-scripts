@@ -7,7 +7,7 @@ TODO: add capability to check parent-child output
 """
 
 
-sshname = "yourusernamehere" # replace with your login
+sshname = "yoursshname" # replace with your login
 
 if __name__ == "__main__":
     # Check for parameters: first parameter should be a pod/cluster; subsequent parameters should be a list of installs
@@ -25,10 +25,26 @@ if __name__ == "__main__":
     for arg in args[2:]:
         stgstr += " " + arg
     stgstr += "\""
+    
+    gitstr = "ssh -t %s@pod-%s.wpengine.com \"cd /nas/wp/www/sites; sudo du -shc" % (sshname, args[1])
+    for arg in args[2:]:
+        gitstr += " %s/.git" % (arg)
+    gitstr += "\""
+    
+    wpepstr = "ssh -t %s@pod-%s.wpengine.com \"cd /nas/wp/www/sites; sudo du -shc" % (sshname, args[1])
+    for arg in args[2:]:
+        wpepstr += " %s/_wpeprivate" % (arg)
+    wpepstr += "\""
+    
+    
     print "production sites:\n"
     call(execstr, shell=True)
     print "staging sites:\n"
     call(stgstr, shell=True)
+    print "git size:\n"
+    call(gitstr, shell=True)
+    print "git size:\n"
+    call(wpepstr, shell=True)
 
 """
 
