@@ -158,3 +158,24 @@ if __name__ == "__main__":
     sqlslow = "ssh -t %s@pod-%s.wpengine.com \"cat /var/log/mysql/mysql-slow.log | grep ehoanshelt" % (sshname, args[1])
     print "My-SQL Slow Log:\n"
     call(sqlslow, shell=True)
+
+#################### Check for php handler in .htaccess #############################
+    
+    commandstrphphandle = " \"grep 'AddType application/x-httpd-php' /nas/wp/www/sites/%s/.htaccess"" % (args[2])
+    execstr = '%s%s' % (connstr,commandstrphphandle)
+    print "Checking for PHP handler in .htaccess:\n"
+    p = Popen(execstr, shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
+    output, err = p.communicate(b"input data that is passed to subprocess' stdin")
+    if len(output) > 10:
+        text = "ALERT! PHP handler found in .htaccess!"
+        print text
+        if not os.path.exists(localdir):
+            os.makedirs(localdir)
+        file = open(localdir + '/php_handler.txt', 'w+')
+        pickle.dump(output, file)
+        file.close()
+        print "Writing to File Completed to %s/php_handler.txt" % (localdir)
+        print "++++++++++++++++++++++++++++++++++"
+    else:
+        print successmessage
+        print "++++++++++++++++++++++++++++++++++"
