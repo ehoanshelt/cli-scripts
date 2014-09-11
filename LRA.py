@@ -161,7 +161,7 @@ if __name__ == "__main__":
 
 #################### Check for php handler in .htaccess #############################
     
-    commandstrphphandle = " \"grep 'AddType application/x-httpd-php' /nas/wp/www/sites/%s/.htaccess"" % (args[2])
+    commandstrphphandle = " \"grep 'AddType application/x-httpd-php' /nas/wp/www/sites/%s/.htaccess\"" % (args[2])
     execstr = '%s%s' % (connstr,commandstrphphandle)
     print "Checking for PHP handler in .htaccess:\n"
     p = Popen(execstr, shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
