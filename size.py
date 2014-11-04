@@ -43,7 +43,7 @@ if __name__ == "__main__":
     call(stgstr, shell=True)
     print "git size:\n"
     call(gitstr, shell=True)
-    print "git size:\n"
+    print "_wpeprivate size:\n"
     call(wpepstr, shell=True)
 
 """
